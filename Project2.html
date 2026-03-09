@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Compact Residential — Diya Parmar</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .proj-hero-wrap{height:100vh;position:relative;overflow:hidden;background:var(--dark);}
+    .proj-hero-wrap img{width:100%;height:115%;object-fit:cover;display:block;filter:brightness(.5);transform-origin:center bottom;}
+    .proj-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,13,.9) 0%,rgba(13,13,13,.15) 55%,transparent 100%);}
+    .proj-hero-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:80px;}
+    .proj-htag{font-size:.6rem;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;}
+    .proj-htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,6.5rem);font-weight:300;color:#fff;line-height:1;max-width:700px;}
+    .proj-hstatus{display:inline-flex;align-items:center;gap:10px;margin-top:28px;font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.1);padding:9px 20px;width:fit-content;}
+
+    /* PDF viewer */
+    .pdf-section{background:var(--dark);padding:0;border-top:1px solid rgba(255,255,255,.05);}
+    .pdf-label{padding:40px 80px 20px;display:flex;align-items:center;gap:14px;}
+    .pdf-label span{font-size:.6rem;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);}
+    .pdf-label::before{content:'';width:32px;height:1px;background:var(--gold);}
+    .pdf-frame-wrap{width:100%;height:calc(100vh - 68px);}
+    .pdf-frame-wrap iframe{width:100%;height:100%;border:none;display:block;}
+  </style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav class="proj-page-nav">
+  <a class="back-btn" href="index.html">← Back to Portfolio</a>
+  <span class="proj-title-nav">Institutionl Design</span>
+</nav>
+
+<!-- HERO -->
+<div class="proj-hero-wrap" id="p2-hero">
+  <img src="images/institutional.PNG" alt="Institutional Design" id="p2-hero-img"/>
+  <div class="proj-hero-overlay"></div>
+  <div class="proj-hero-content">
+    <p class="proj-htag" id="p2-tag">Architecture · Institutional Design · 2025</p>
+    <h1 class="proj-htitle" id="p2-title">Institutional Design</h1>
+    <div class="proj-hstatus" id="p2-status">
+      <span style="width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s ease-in-out infinite;flex-shrink:0;"></span>
+      Residential Architecture Project
+    </div>
+  </div>
+</div>
+
+<!-- PDF VIEWER -->
+<div class="pdf-section">
+  <div class="pdf-label"><span>Project Documentation</span></div>
+  <div class="pdf-frame-wrap">
+    <iframe src="pdf/pro 2.pdf#toolbar=0"></iframe>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Diya Parmar · Architecture Portfolio</p>
+  <p><a href="index.html" style="color:rgba(255,255,255,.3);text-decoration:none;">← Back to Portfolio</a></p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let mx=-100,my=-100,rx=-100,ry=-100;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function a(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;cursor.style.left=mx+'px';cursor.style.top=my+'px';ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a);})();
+document.querySelectorAll('a').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.width='64px';ring.style.height='64px';});
+  el.addEventListener('mouseleave',()=>{ring.style.width='36px';ring.style.height='36px';});
+});
+gsap.registerPlugin(ScrollTrigger);
+gsap.from('#p2-hero-img',{scale:1.1,duration:2,ease:'power3.out'});
+gsap.from('#p2-tag',{opacity:0,y:24,duration:.9,ease:'power3.out',delay:.5});
+gsap.from('#p2-title',{opacity:0,y:50,duration:1.2,ease:'power3.out',delay:.7});
+gsap.from('#p2-status',{opacity:0,y:20,duration:.8,ease:'power3.out',delay:1});
+gsap.to('#p2-hero-img',{yPercent:20,ease:'none',scrollTrigger:{trigger:'#p2-hero',start:'top top',end:'bottom top',scrub:true}});
+</script>
+<style>@keyframes pulse{0%,100%{opacity:.3;transform:scale(.8);}50%{opacity:1;transform:scale(1.2);}}</style>
+</body>
+</html>
